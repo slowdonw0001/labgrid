@@ -56,6 +56,26 @@ class ManualPowerDriver(Driver, PowerResetMixin, PowerProtocol):
             f"CYCLE the target {self.target.name} and press enter"
         )
 
+@target_factory.reg_driver
+@attr.s(eq=False)
+class VoidPowerDriver(Driver, PowerResetMixin, PowerProtocol):
+    """VoidPowerDriver - Driver for no controlable target power"""
+
+    @Driver.check_active
+    @step()
+    def on(self):
+        return
+
+    @Driver.check_active
+    @step()
+    def off(self):
+        return
+
+    @Driver.check_active
+    @step()
+    def cycle(self):
+        return
+
 
 @target_factory.reg_driver
 @attr.s(eq=False)
